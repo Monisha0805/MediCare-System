@@ -13,7 +13,7 @@ A web-based Medicine Management System with role-based access for Patients, Doct
 
 ## Tech Stack
 
-- **Frontend:** HTML, CSS, JavaScript (Vanilla)
+- **Frontend:** HTML, CSS, JavaScript
 - **Backend / DB:** MongoDB (`mongodb` npm package)
 
 ## Project Structure
@@ -42,8 +42,5 @@ medicare-system/
    npm install
    ```
 
-3. Open `index.html` in your browser to run the frontend.
+3. Open `index.html` in your browser to run.
 
-## License
-
-ISC
