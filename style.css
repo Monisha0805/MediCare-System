@@ -1,0 +1,230 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+    background: #f4f9fc;
+    color: #333;
+    line-height: 1.6;
+}
+header {
+    background: linear-gradient(135deg, #00c4b4, #007bff);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+header p {
+    font-size: 1.2em;
+    font-weight: 300;
+}
+nav {
+    background: #fff;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: none;
+}
+nav a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+nav a:hover {
+    color: #00c4b4;
+}
+.container {
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 30px 20px;
+    gap: 20px;
+    background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://via.placeholder.com/1500x800?text=Medical+Background');
+    background-size: cover;
+}
+.card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    width: 280px;
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s;
+    display: none;
+}
+.card.active {
+    display: block;
+}
+.card:hover {
+    transform: translateY(-10px);
+}
+.card h3 {
+    color: #007bff;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+.card p {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+.btn, .submit-btn {
+    background: #00c4b4;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.btn:hover, .submit-btn:hover {
+    background: #007bff;
+}
+.cancel-btn, .remove-btn {
+    background: #e74c3c;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.cancel-btn:hover, .remove-btn:hover {
+    background: #c0392b;
+}
+.section {
+    display: none;
+    padding: 30px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 900px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.section.active {
+    display: block;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 350px;
+    margin: 0 auto;
+}
+input, select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+input:focus, select:focus {
+    border-color: #00c4b4;
+    outline: none;
+}
+label {
+    text-align: left;
+    font-weight: 500;
+    color: #333;
+}
+.error, .success {
+    font-size: 0.9em;
+    margin-top: 10px;
+    display: none;
+}
+.error {
+    color: #e74c3c;
+}
+.success {
+    color: #00c4b4;
+}
+.history, .stock-list {
+    margin-top: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+.history li, .stock-list li {
+    list-style: none;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.2s;
+}
+.stock-list li:hover {
+    background: #e0f7fa;
+    cursor: pointer;
+}
+.low-stock {
+    color: #e74c3c;
+    font-weight: bold;
+}
+.dashboard-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.metric-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+}
+.metric-card h4 {
+    color: #007bff;
+    margin-bottom: 10px;
+}
+.metric-card p {
+    font-size: 1.5em;
+    color: #333;
+}
+footer {
+    background: #007bff;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+}
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+    nav a {
+        margin: 0 10px;
+        font-size: 0.9em;
+    }
+    .card, .metric-card {
+        width: 100%;
+        max-width: 280px;
+    }
+    .section {
+        padding: 20px;
+        max-width: 90%;
+    }
+}

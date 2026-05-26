@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>MediCare System</h1>
+        <p id="welcomeMessage">Your Health, Our Priority!</p>
+    </header>
+
+    <nav id="nav"></nav>
+
+    <div class="container">
+        <div class="card" id="patient">
+            <h3>Patient Portal</h3>
+            <p>Buy medicines, track orders, and manage payments!</p>
+            <a href="#patient" class="btn" onclick="showSection('patient')">Get Started</a>
+        </div>
+        <div class="card" id="doctor">
+            <h3>Doctor Dashboard</h3>
+            <p>Prescribe with ease and care for patients!</p>
+            <a href="#doctor" class="btn" onclick="showSection('doctor')">Start Now</a>
+        </div>
+        <div class="card" id="delivery">
+            <h3>Delivery Hub</h3>
+            <p>Deliver medicines swiftly and safely!</p>
+            <a href="#delivery" class="btn" onclick="showSection('delivery')">Deliver Now</a>
+        </div>
+        <div class="card" id="pharmacist">
+            <h3>Pharmacist Zone</h3>
+            <p>Manage stock and keep supplies ready!</p>
+            <a href="#pharmacist" class="btn" onclick="showSection('pharmacist')">Access Now</a>
+        </div>
+        <div class="card" id="supplier">
+            <h3>Supplier Network</h3>
+            <p>Supply medicines to save lives!</p>
+            <a href="#supplier" class="btn" onclick="showSection('supplier')">Join Us</a>
+        </div>
+        <div class="card" id="admin">
+            <h3>Admin Panel</h3>
+            <p>Control and monitor the entire system!</p>
+            <a href="#admin" class="btn" onclick="showSection('admin')">Manage Now</a>
+        </div>
+    </div>
+
+    <div class="section" id="register-section">
+        <h2>Join MediCare!</h2>
+        <form onsubmit="register(); return false;">
+            <label for="regUsername">Username</label>
+            <input type="text" id="regUsername" placeholder="Enter Username" required>
+            <label for="regPassword">Password</label>
+            <input type="password" id="regPassword" placeholder="Enter Password" required>
+            <label for="regRole">Role</label>
+            <select id="regRole">
+                <option value="patient">Patient</option>
+                <option value="doctor">Doctor</option>
+                <option value="delivery">Delivery Agent</option>
+                <option value="pharmacist">Pharmacist</option>
+                <option value="supplier">Supplier</option>
+                <option value="admin">Admin</option>
+            </select>
+            <button type="submit" class="submit-btn">Register</button>
+            <p class="error" id="regError"></p>
+            <p class="success" id="regSuccess"></p>
+            <p>Already a member? <a href="#" onclick="showSection('login')">Login here</a></p>
+        </form>
+    </div>
+
+    <div class="section" id="login-section">
+        <h2>Welcome Back!</h2>
+        <form onsubmit="login(); return false;">
+            <label for="loginUsername">Username</label>
+            <input type="text" id="loginUsername" placeholder="Enter Username" required>
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter Password" required>
+            <button type="submit" class="submit-btn">Login</button>
+            <p class="error" id="loginError">Invalid username or password!</p>
+            <p>New user? <a href="#" onclick="showSection('register')">Register here</a></p>
+        </form>
+    </div>
+
+    <div class="section" id="patient-section">
+        <h2>Patient Portal</h2>
+        <form id="purchaseForm">
+            <label for="medicineName">Medicine Name</label>
+            <input type="text" id="medicineName" placeholder="e.g., Paracetamol" required>
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" min="1" placeholder="Enter quantity" required>
+            <button type="submit" class="submit-btn">Purchase</button>
+        </form>
+        <p id="orderResult"></p>
+        <h3>Your Orders</h3>
+        <ul id="orderHistory" class="history"></ul>
+        <button class="btn" onclick="showSection('patient-stock')">View Available Stock</button>
+        <button class="btn" onclick="showSection('patient-payment')">Manage Payment</button>
+        <button class="btn" onclick="showSection('patient-delivery')">View Delivery Status</button>
+        <button class="btn" onclick="showSection('container')">Back to Dashboard</button>
+    </div>
+
+    <div class="section" id="patient-stock-section">
+        <h2>Available Medicines</h2>
+        <p>Click a medicine to select it for purchase.</p>
+        <ul id="patientStockList" class="stock-list"></ul>
+        <button class="btn" onclick="showSection('patient')">Back to Patient Portal</button>
+        <button class="btn" onclick="showSection('container')">Back to Dashboard</button>
+    </div>
+
+    <div class="section" id="patient-payment-section">
+        <h2>Manage Payment Method</h2>
+        <form id="paymentForm">
+            <label for="paymentMethod">Payment Method</label>
+            <select id="paymentMethod">
+                <option value="Debit">Debit</option>
+                <option value="Credit">Credit</option>
+                <option value="UPI">UPI</option>
+            </select>
+            <label for="paymentDetails">Payment Details</label>
+            <input type="text" id="paymentDetails" placeholder="Card Number or UPI ID" required>
+            <button type="submit" class="submit-btn">Save Payment Method</button>
+        </form>
+        <p id="paymentResult"></p>
+        <button class="btn" onclick="showSection('patient')">Back to Patient Portal</button>
+        <button class="btn" onclick="showSection('container')">Back to Dashboard</button>
+    </div>
+
+    <div class="section" id="patient-delivery-section">
+        <h2>Delivery Status</h2>
+        <h3>Your Deliveries</h3>
+        <ul id="patientDeliveryList" class="history"></ul>
+        <button class="btn" onclick="showSection('patient')">Back to Patient Portal</button>
+        <button class="btn" onclick="showSection('container')">Back to Dashboard</button>
+    </div>
+
+    <div class="section" id="doctor-section">
+        <h2>Doctor Dashboard</h2>
+        <form id="prescriptionForm">
+            <label for="patientName">Patient Name</label>
+            <input type="text" id="patientName" placeholder="Enter Patient Name" required>
+            <label for="prescriptionMedicine">Medicine</label>
+            <input type="text" id="prescriptionMedicine" placeholder="e.g., Ibuprofen" required>
+            <label for="dosage">Dosage (mg)</label>
+            <input type="number" id="dosage" min="1" placeholder="Enter dosage" required>
+            <button type="submit" class="submit-btn">Prescribe</button>
+        </form>
+        <p id="prescriptionResult"></p>
+        <h3>Prescription History</h3>
+        <ul id="prescriptionHistory" class="history"></ul>
+        <button class="btn" onclick="showSection('container')">Back to Dashboard</button>
+    </div>
+
+    <div class="section" id="delivery-section">
+        <h2>Delivery Hub</h2>
+        <label for="orderSelect">Select Order</label>
+        <select id="orderSelect">
+            <option value="">Select an order</option>
+        </select>
+        <label for="deliveryStatus">Status</label>
+        <select id="deliveryStatus">
+            <option value="Ordered">Ordered</option>
+            <option value="In Transit">In Transit</option>
+            <option value="Delivered">Delivered</option>
+        </select>
+        <button class="btn" onclick="updateDelivery()">Update Status</button>
+        <p id="deliveryResult"></p>
+        <h3>Delivery List</h3>
+        <ul id="deliveryList" class="history"></ul>
+        <button class="btn" onclick="showSection('container')">Back to Dashboard</button>
+    </div>
+
+    <div class="section" id="pharmacist-section">
+        <h2>Pharmacist Zone</h2>
+        <form id="restockForm">
+            <label for="restockMedicine">Medicine Name</label>
+            <input type="text" id="restockMedicine" placeholder="e.g., Paracetamol" required>
+            <label for="restockQuantity">Quantity</label>
+            <input type="number" id="restockQuantity" min="1" placeholder="Enter quantity" required>
+            <button type="submit" class="submit-btn">Restock</button>
+        </form>
+        <p id="restockResult"></p>
+        <h3>Current Stock</h3>
+        <p>Click a medicine to select it for restocking.</p>
+        <ul id="stockReport" class="stock-list"></ul>
+        <button class="btn" onclick="generateReport()">Generate Detailed Report</button>
+        <p id="reportResult"></p>
+        <button class="btn" onclick="showSection('container')">Back to Dashboard</button>
+    </div>
+
+    <div class="section" id="supplier-section">
+        <h2>Supplier Network</h2>
+        <form id="supplyForm">
+            <label for="supplyMedicine">Medicine Name</label>
+            <input type="text" id="supplyMedicine" placeholder="e.g., Paracetamol" required>
+            <label for="supplyQuantity">Quantity</label>
+            <input type="number" id="supplyQuantity" min="1" placeholder="Enter quantity" required>
+            <button type="submit" class="submit-btn">Supply</button>
+        </form>
+        <p id="supplyResult"></p>
+        <h3>Supply History</h3>
+        <ul id="supplyHistory" class="history"></ul>
+        <button class="btn" onclick="showSection('container')">Back to Dashboard</button>
+    </div>
+
+    <div class="section" id="admin-section">
+        <h2>Admin Dashboard</h2>
+        <div id="adminDashboard"></div>
+        <button class="btn" onclick="showSection('admin-users')">Manage Users</button>
+        <button class="btn" onclick="showSection('admin-orders')">View Orders</button>
+        <button class="btn" onclick="showSection('admin-prescriptions')">View Prescriptions</button>
+        <button class="btn" onclick="showSection('admin-deliveries')">View Deliveries</button>
+        <button class="btn" onclick="showSection('admin-stock')">View Stock</button>
+        <button class="btn" onclick="showSection('admin-supplies')">View Supplies</button>
+        <button class="btn" onclick="showSection('container')">Back to Main Dashboard</button>
+    </div>
+
+    <div class="section" id="admin-users-section">
+        <h2>Manage Users</h2>
+        <form id="userForm">
+            <label for="adminUsername">Username</label>
+            <input type="text" id="adminUsername" placeholder="Enter Username" required>
+            <label for="adminRole">Role</label>
+            <select id="adminRole">
+                <option value="patient">Patient</option>
+                <option value="doctor">Doctor</option>
+                <option value="delivery">Delivery Agent</option>
+                <option value="pharmacist">Pharmacist</option>
+                <option value="supplier">Supplier</option>
+            </select>
+            <button type="submit" class="submit-btn">Add User</button>
+        </form>
+        <p id="userResult"></p>
+        <h3>User List</h3>
+        <ul id="userList" class="history"></ul>
+        <button class="btn" onclick="showSection('admin')">Back to Admin Dashboard</button>
+        <button class="btn" onclick="showSection('container')">Back to Main Dashboard</button>
+    </div>
+
+    <div class="section" id="admin-orders-section">
+        <h2>All Orders</h2>
+        <ul id="adminOrderList" class="history"></ul>
+        <button class="btn" onclick="showSection('admin')">Back to Admin Dashboard</button>
+        <button class="btn" onclick="showSection('container')">Back to Main Dashboard</button>
+    </div>
+
+    <div class="section" id="admin-prescriptions-section">
+        <h2>All Prescriptions</h2>
+        <ul id="adminPrescriptionList" class="history"></ul>
+        <button class="btn" onclick="showSection('admin')">Back to Admin Dashboard</button>
+        <button class="btn" onclick="showSection('container')">Back to Main Dashboard</button>
+    </div>
+
+    <div class="section" id="admin-deliveries-section">
+        <h2>All Deliveries</h2>
+        <ul id="adminDeliveryList" class="history"></ul>
+        <button class="btn" onclick="showSection('admin')">Back to Admin Dashboard</button>
+        <button class="btn" onclick="showSection('container')">Back to Main Dashboard</button>
+    </div>
+
+    <div class="section" id="admin-stock-section">
+        <h2>Stock Overview</h2>
+        <ul id="adminStockList" class="history"></ul>
+        <button class="btn" onclick="showSection('admin')">Back to Admin Dashboard</button>
+        <button class="btn" onclick="showSection('container')">Back to Main Dashboard</button>
+    </div>
+
+    <div class="section" id="admin-supplies-section">
+        <h2>Supply History</h2>
+        <ul id="adminSupplyList" class="history"></ul>
+        <button class="btn" onclick="showSection('admin')">Back to Admin Dashboard</button>
+        <button class="btn" onclick="showSection('container')">Back to Main Dashboard</button>
+    </div>
+
+    <footer>
+        <p></p>
+    </footer>
+</body>
+</html>
